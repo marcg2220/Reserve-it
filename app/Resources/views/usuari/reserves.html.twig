@@ -1,0 +1,13 @@
+{%  extends 'frontend.html.twig' %}
+
+{% block title %}Últimes reserves realitzades{% endblock %}
+{% block id 'reserves' %}
+
+{% block reserva %}
+
+{% for reserva in reserves %}
+{{ include('reserva/reseva.html.twig') }}
+{% else %}
+    <p>Aquest usuari encara no ha fet cap reserva</p>
+{% endfor %}
+{% endblock %}

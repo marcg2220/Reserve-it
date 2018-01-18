@@ -1,0 +1,58 @@
+{% extends 'frontend.html.twig' %}
+
+{% block id 'usuari' %}
+{% block title "Registra't gratis com a usuari" %}
+
+{% block article %}
+    <h1>{{ block('title') }}</h1>
+
+    {{  form_start(formulari) }}
+    <div>
+        {{ form_errors(formulari) }}
+
+        <fieldset>
+            <legend>Dades Personals</legend>
+            {{ form_row(formulari.nom) }}
+            {{ form_row(formulari.cognoms) }}
+            {{ form_row(formulari.data_naixement) }}
+            {{ form_row(formulari.dni) }}
+        </fieldset>
+        <fieldset>
+            <legend>Dades d'accés</legend>
+            {{ form_row(formulari.email) }}
+            {{ form_row(formulari.passwordEnClar) }}
+            <p>Si vols canviar la contrassenya, escriu-la dues vegades. Si no és el cas, deixa el seu valor en blanc.</p>
+        </fieldset>
+        <fieldset>
+            {{ form_errors(formulari.accepta_email) }}
+            {{ form_row(formulari.accepta_email) }}
+        </fieldset>
+
+        {{ form_row(formulari.registrar) }}
+    </div>
+    {{ form_end(formulari) }}
+{% endblock %}
+
+{% block aside %}
+    <section id="faq">
+        <h2>Preguntas frecuentes</h2>
+
+        <dl>
+            <dt>¿Lorem ipsum dolor sit amet?</dt>
+            <dd>
+                Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut
+                labore et dolore magna aliqua.
+            </dd>
+            <dt>¿Ut enim ad minim veniam?</dt>
+            <dd>
+                Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
+                commodo consequat. Duis aute irure dolor in reprehenderit in
+                voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            </dd>
+            <dt>¿Excepteur sint occaecat cupidatat non proident?</dt>
+            <dd>
+                Sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </dd>
+        </dl>
+    </section>
+{% endblock %}

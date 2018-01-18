@@ -1,0 +1,30 @@
+# To get started with security, check out the documentation:
+# https://symfony.com/doc/current/security.html
+security:
+    firewalls:
+        frontend:
+            pattern:    ^/*
+            provider:   usuaris
+            anonymous:  ~
+            form_login:
+                login_path:    usuari_login
+                check_path:    usuari_login_check
+                use_referer: true
+                default_target_path: usuari_reserves
+                remember_me: true
+            logout:
+                path:    usuari_logout
+
+
+
+    access_control:
+        - { path: ^/usuari/(login|registre), roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/usuari/*, roles: ROLE_USUARI }
+        - { path: ^/usuari/*, roles: ROLE_USUARI }
+
+    providers:
+        usuaris:
+            entity: { class: AppBundle\Entity\Usuari, property: email }
+
+    encoders:
+        AppBundle\Entity\Usuari: 'bcrypt'

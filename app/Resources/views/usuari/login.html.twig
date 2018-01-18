@@ -1,0 +1,29 @@
+{%  extends 'frontend.html.twig' %}
+{% block id 'login' %}
+{% block title "Formulari d'accés" %}
+
+{% block article %}
+    <section id="entrar">
+        <h1>{{ 'Accedeix al teu compte'|trans }}</h1>
+
+        <form action="{{ path('usuari_login_check') }}" method="post">
+
+            <label for="username">{{ 'Email'|trans }}</label>
+            <input id="username" type="text" name="_username" value="{% if last_username is defined %} {{ last_username }} {% endif %}" />
+
+            <label for="password">{{ 'Contrasenya'|trans }}</label>
+            <input type="password" id="password" name="_password" />
+
+            <input type="checkbox" id="remember_me" name="_remember_me" checked />
+            <label for="remember_me">{{ 'No tancar sessió'|trans }}</label>
+
+            <input type="submit" name="login" value="{{ 'Entrar'|trans }}" />
+        </form>
+    </section>
+
+    <section id="registrar">
+        <a class="boton" href="{{ path('usuari_registre') }}">{{ "Registra't gratis com a usuari"|trans }}</a>
+    </section>
+{% endblock %}
+
+{% block aside %}{% endblock %}

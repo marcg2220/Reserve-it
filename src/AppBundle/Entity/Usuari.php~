@@ -1,0 +1,370 @@
+<?php
+
+namespace AppBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Context\ExecutionContext;
+
+/**
+ * Usuari
+ *
+ * @ORM\Table(name="usuari")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UsuariRepository")
+ */
+class Usuari
+{
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="nom", type="string", length=255)
+     */
+    private $nom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="cognoms", type="string", length=255)
+     */
+    private $cognoms;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255)
+     */
+    private $email;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="pasword", type="string", length=255)
+     */
+    private $pasword;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="dni", type="string", length=9, unique=true)
+     */
+    private $dni;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ciutat", type="string", length=50)
+     */
+    private $ciutat;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adreca", type="string", length=255)
+     */
+    private $adreca;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="accepta_email", type="boolean")
+     */
+    private $acceptaEmail;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="data_alta", type="datetime")
+     */
+    private $dataAlta;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="data_naixement", type="datetime")
+     */
+    private $dataNaixement;
+
+    public function __construct()
+    {
+        $this->dataAlta = new \DateTime();
+    }
+
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set nom
+     *
+     * @param string $nom
+     * @return Usuari
+     */
+    public function setNom($nom)
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    /**
+     * Get nom
+     *
+     * @return string 
+     */
+    public function getNom()
+    {
+        return $this->nom;
+    }
+
+    /**
+     * Set cognoms
+     *
+     * @param string $cognoms
+     * @return Usuari
+     */
+    public function setCognoms($cognoms)
+    {
+        $this->cognoms = $cognoms;
+
+        return $this;
+    }
+
+    /**
+     * Get cognoms
+     *
+     * @return string 
+     */
+    public function getCognoms()
+    {
+        return $this->cognoms;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return Usuari
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set pasword
+     *
+     * @param string $pasword
+     * @return Usuari
+     */
+    public function setPasword($pasword)
+    {
+        $this->pasword = $pasword;
+
+        return $this;
+    }
+
+    /**
+     * Get pasword
+     *
+     * @return string 
+     */
+    public function getPasword()
+    {
+        return $this->pasword;
+    }
+
+    /**
+     * Set dni
+     *
+     * @param string $dni
+     * @return Usuari
+     */
+    public function setDni($dni)
+    {
+        if ($this->dniValid($dni))
+        {
+            $this->dni = $dni;
+        }
+        else
+        {
+            echo  "<script type=\"text/javascript\">
+                alert('El DNI introduït no és correcte!');
+            </script>";
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get dni
+     *
+     * @return string 
+     */
+    public function getDni()
+    {
+        return $this->dni;
+    }
+
+    /**
+     * Set ciutat
+     *
+     * @param string $ciutat
+     * @return Usuari
+     */
+    public function setCiutat($ciutat)
+    {
+        $this->ciutat = $ciutat;
+
+        return $this;
+    }
+
+    /**
+     * Get ciutat
+     *
+     * @return string 
+     */
+    public function getCiutat()
+    {
+        return $this->ciutat;
+    }
+
+    /**
+     * Set adreca
+     *
+     * @param string $adreca
+     * @return Usuari
+     */
+    public function setAdreca($adreca)
+    {
+        $this->adreca = $adreca;
+
+        return $this;
+    }
+
+    /**
+     * Get adreca
+     *
+     * @return string 
+     */
+    public function getAdreca()
+    {
+        return $this->adreca;
+    }
+
+    /**
+     * Set acceptaEmail
+     *
+     * @param boolean $acceptaEmail
+     * @return Usuari
+     */
+    public function setAcceptaEmail($acceptaEmail)
+    {
+        $this->acceptaEmail = $acceptaEmail;
+
+        return $this;
+    }
+
+    /**
+     * Get acceptaEmail
+     *
+     * @return boolean 
+     */
+    public function getAcceptaEmail()
+    {
+        return $this->acceptaEmail;
+    }
+
+    /**
+     * Set dataAlta
+     *
+     * @param \DateTime $dataAlta
+     * @return Usuari
+     */
+    public function setDataAlta($dataAlta)
+    {
+        $this->dataAlta = $dataAlta;
+
+        return $this;
+    }
+
+    /**
+     * Get dataAlta
+     *
+     * @return \DateTime 
+     */
+    public function getDataAlta()
+    {
+        return $this->dataAlta;
+    }
+
+    /**
+     * Set dataNaixement
+     *
+     * @param \DateTime $dataNaixement
+     * @return Usuari
+     */
+    public function setDataNaixement($dataNaixement)
+    {
+        $this->dataNaixement = $dataNaixement;
+
+        return $this;
+    }
+
+    /**
+     * Get dataNaixement
+     *
+     * @return \DateTime 
+     */
+    public function getDataNaixement()
+    {
+        return $this->dataNaixement;
+    }
+
+    function __toString()
+    {
+        return $this->getNom().' '.$this->getCognoms();
+    }
+
+    protected function dniValid($dni)
+    {
+        if (strlen($dni) != 9 || preg_match('/^[XYZ]?([0-9]{7,8})([A-Z])$/i', $dni, $matches) !== 1)
+        {
+            return false;
+        }
+
+        $map = 'TRWAGMYFPDXBNJZSQVHLCKE';
+
+        list(, $number, $letter) = $matches;
+
+        return strtoupper($letter) === $map[((int) $number) % 23];
+    }
+
+
+}

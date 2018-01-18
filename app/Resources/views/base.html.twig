@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{% block title %}{% endblock %}| Reserve'it</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('bundles/app/css/normalitzar.css') }}"/>
+            <link rel="stylesheet" href="{{ asset('bundles/app/css/comu.css') }}"/>
+        {% endblock %}
+        {% block rss %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        {% block javascripts %}
+            <!--[if lt IE 9]>
+            <script src="{{ asset('bundles/app/html5.js') }}"></script>
+            <![endif]-->
+        {% endblock %}
+    </head>
+    <body id="{% block id '' %}">
+        <div id="contenedor">
+            {% block body %}{% endblock %}
+
+            <footer>
+                &copy; {{ 'now'|date('Y') }} - Reserve'it
+                <a href="{{ path('pagina', {nomPagina: 'ajuda'}) }}">
+                    Ajuda
+                </a>
+                <a href="{{ path('pagina', {nomPagina: 'privacitat'}) }}">
+                    Privacitat
+                </a>
+            </footer>
+        </div>
+    </body>
+</html>

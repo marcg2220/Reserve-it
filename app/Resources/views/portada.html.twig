@@ -1,0 +1,21 @@
+{% extends 'frontend.html.twig' %}
+{% block id 'portada' %}
+{% block title %} Home {% endblock %}
+
+{% block anunci %}
+    {% if not is_granted('ROLE_USUARI') %}
+
+    {% endif %}
+{% endblock %}
+
+{% block article %}
+
+{% endblock %}
+
+{% block aside %}
+    {{ parent() }}
+
+    {% block registre %}{% endblock %}
+
+{% endblock %}
+

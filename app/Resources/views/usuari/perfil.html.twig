@@ -1,0 +1,40 @@
+{% extends 'frontend.html.twig' %}
+
+    {% block id 'usuari' %}
+    {% block title 'Veure / Modificar les meves dades' %}
+
+    {% block article %}
+        <h1>{{ block('title') }}</h1>
+
+        {{ form_start(formulari) }}
+        <div>
+            <div class="errors">
+                {{ form_errors(formulari) }}
+            </div>
+
+            <div>
+                {{ form_row(formulari.nom) }}
+            </div>
+            <div>
+                {{ form_row(formulari.cognoms) }}
+            </div>
+            <div>
+                {{ form_widget(formulari.passwordEnClar) }}
+                <p>Si vols canviar la contrassenya, escriu-la dues vegades. Si no és el cas, deixa el seu valor en blanc.</p>
+            </div>
+            <div>
+                {{ form_row(formulari.dataNaixement) }}
+            </div>
+            <div>
+                {{ form_rou(formulari.dni) }}
+            </div>
+            <div>
+                {{ form_errors(formulari.acceptaEmail) }}
+                {{ form_widget(formulari.acceptaEmail) }}
+                <span>Vull rebre el butlletí d'ofertas de Reserve'it</span>
+            </div>
+
+            {{ form_widget(formulari.guardar) }}
+        </div>
+        {{ form_end(formulari) }}
+    {% endblock %}

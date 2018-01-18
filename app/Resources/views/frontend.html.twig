@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{  parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/app/css/frontend.css') }}" />
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <header>
+        <h1><a href="{{ path('portada') }}">RESERVE'IT</a></h1>
+        <nav>
+            <ul>
+                <li><a href="{{ path('portada') }}">El club</a></li>
+                <li><a href="{{ path('portada') }}">Reserva pista Padel</a></li>
+                <li><a href="{{ path('portada') }}">Reserva pista Tenis</a></li>
+                <li><a href="{{ path('usuari_reserves') }}">{{ 'Les meves reserves'|trans }}</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    {% block anunci %}{% endblock %}
+
+    <article class="{{ block('portada') }}">
+        {% block article %}{% endblock %}
+    </article>
+    <aside>
+        {% block aside %}
+            {% block registre %}
+                <a id="registre" class="boton" href="{{ path('usuari_registre') }}">{{ "Registra't"|trans }}</a>
+            {% endblock %}
+
+            <section id="login">
+                {{ render_esi(controller('AppBundle:Usuari:caixaLogin')) }}
+            </section>
+        {% endblock %}
+    </aside>
+{% endblock %}
