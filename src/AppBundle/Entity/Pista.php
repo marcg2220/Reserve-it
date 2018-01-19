@@ -8,6 +8,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\TipusPista;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -57,12 +58,12 @@ class Pista
     /**
      * Set tipus_pista
      *
-     * @param \AppBundle\Entity\TipusPista $tipusPista
+     * @param TipusPista $tipus_pista
      * @return Pista
      */
-    public function setTipusPista(\AppBundle\Entity\TipusPista $tipusPista = null)
+    public function setTipusPista(TipusPista $tipus_pista = null)
     {
-        $this->tipus_pista = $tipusPista;
+        $this->tipus_pista = $tipus_pista;
 
         return $this;
     }
@@ -93,7 +94,7 @@ class Pista
 
     function __toString()
     {
-        return "Pista ".$this->getId()."-".$this->getTipus();
+        return "Pista ".$this->getId()."-".$this->getTipusPista();
     }
 
 }
