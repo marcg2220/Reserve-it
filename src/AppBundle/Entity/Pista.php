@@ -94,7 +94,7 @@ class Pista
 
     function __toString()
     {
-        return "Pista ".$this->getId()."-".$this->getTipusPista();
+        return "Pista ".$this->getNumPista();
     }
 
 }

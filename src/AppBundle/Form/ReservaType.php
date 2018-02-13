@@ -10,18 +10,18 @@ namespace AppBundle\Form;
 
 
 use AppBundle\Form\Listener\AddPistaFieldSubscriber;
+//use Doctrine\DBAL\Types\DateType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class ReservaType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
-        $builder->addEventSubscriber(new AddPistaFieldSubscriber());
 
         // recordar importar las clases FormEvents y FormEvent
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function(FormEvent $event){
@@ -34,13 +34,29 @@ class ReservaType extends AbstractType
             }else{
                 $tipus_pista = null;
             }
-
             $form->add('tipus_pista', 'entity', array(
                 'class' => 'AppBundle\Entity\TipusPista',
                 'mapped' => false, // importante indicar que el campo no está mapeado
                 'data' => $tipus_pista, //establecemos el valor inicial del campo.
             ));
+
+            $form->add('pista', 'entity', array(
+                'class' => 'AppBundle\Entity\Pista',
+                'mapped' => false, // importante indicar que el campo no está mapeado
+                'data' => "", //establecemos el valor inicial del campo.
+            ));
+
+            $form->add('diaReserva', 'date', array(
+                'widget' => 'choice',
+                'format' => 'dd-MM-yyyy',
+                'html5' => false,
+                'data' => new \DateTime(),
+                'attr' => ['class' => 'js-datepicker'],
+            ));
+
         });
+
+        $builder->addEventSubscriber(new AddPistaFieldSubscriber());
 
     }
 
@@ -55,24 +71,5 @@ class ReservaType extends AbstractType
     {
         return 'reserva';
     }
-
-    /*$builder
-                ->add('tipus_pista', 'entity', array(
-                    'class' => 'AppBundle:TipusPista',
-                    'property' => 'descripcio',
-                ))
-
-                ->add('pista', 'entity', array(
-                    'class' => 'AppBundle:Pista',
-                ));
-
-
-            // Afegim un EventListener que actualitzarà el camp Pista
-            // per tal que les seves opcions corresponguin
-            // amb el tipus de pista seleccionat per l'usuari
-            $builder->addEventSubscriber(new AddPistaFieldSubscriber());*/
-
-
-
 
 }

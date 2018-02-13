@@ -11,44 +11,28 @@
         {{ form_errors(formulariReserva) }}
 
         <fieldset>
+            <legend>Dia de Reserva</legend>
+            {{ form_row(formulariReserva.diaReserva) }}
+        </fieldset>
+        <fieldset>
             <legend>Pista</legend>
             {{ form_row(formulariReserva.tipus_pista) }}
 
-            {{ form_row(formulariReserva.pista) }}
+            {% if formulariReserva.pista is defined %}
+                {{ form_row(formulariReserva.pista) }}
+            {% endif %}
 
         </fieldset>
 
     </div>
     {{ form_end(formulariReserva) }}
 
-    <script type="javascript">
-        var $tipus_pista = $('#reserva_tipus_pista');
+    {% block javascripts %}
+        <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script src="{{ asset('bundles/app/js/reservaPista.js') }}"></script>
 
-        var $formulariReserva = $tipus_pista.closest('form');
 
-        // cada vez que el usuario cambie el pais en el select
-        $tipus_pista.on('change', function() {
+    {% endblock %}
 
-            // creamos la data, solo con el campo del pais,
-            // ya que es el dato relevante en este caso.
-            var data = $tipus_pista.serialize();
 
-            // Hacemos un envío del formulario, lo que ejecutará el evento preSubmit
-            // del listener AddPistaFieldSubscriber,
-            // y actualizará el campo state, con los estados del pais seleccionado.
-
-            $.ajax({
-                url : $formulariReserva.attr('action'),
-                type: $formulariReserva.attr('method'),
-                data : data,
-                success: function(html) {
-
-                    // la variable html representa toda la página junto con el select de estados.
-                    // el cual tomamos y colocamos para reemplazar el select actual.
-
-                    $('#reserva_pista').replaceWith($(html).find('#reserva_pista'));
-                }
-            });
-        });
-    </script>
 {% endblock %}
